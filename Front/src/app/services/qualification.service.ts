@@ -1,32 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
+import { AuthService } from './auth.service';
+import { Observable } from 'rxjs';
+import { QualificationInterface } from '../models/qualification-interface';
 import { map } from 'rxjs/operators';
 
-import { GroupInterface } from '../models/book-interface';
-
-import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class DataApiService {
+export class QualificationService {
+
   constructor(private http: HttpClient, private authService: AuthService) { }
-  groups: Observable<any>;
-  group: Observable<any>;
-  public selectedGroup: GroupInterface = {
+  qualifications: Observable<any>;
+  qualification: Observable<any>;
+
+  public selectedGroup: QualificationInterface = {
     id: null,
-    name_proyect:'',
-    members: '',
-    group_leader: '',
-    link: '',
-    topic: '',
-    description_proyect: '',
-    scope: '',
-    tools: '',
-    objetive: '',
-    level: '',
-    area: '',
-    state: ''
+    note1:null,
+    note2:null,
+    note3: null,
+    noteEnd:null,
+    description:'',
+    state:'',
   };
 
   headers: HttpHeaders = new HttpHeaders({
@@ -35,7 +30,7 @@ export class DataApiService {
   });
 
   getAllGroups() {
-    const url_api = `http://localhost:8000/api/form`;
+    const url_api = `http://localhost:8000/api/qualification`;
     return this.http.get(url_api);
   }
 
@@ -44,31 +39,31 @@ export class DataApiService {
     return this.http.get(url_api);
   }
   getNotOffers() {
-    const url_api = `http://localhost:8000/api/form`;
+    const url_api = `http://localhost:8000/api/qualification`;
     return this.http.get(url_api);
   }
   getGroupById(id: string) {
     const url_api = `http://localhost:8000/api/form`;
-    return (this.group = this.http.get(url_api));
+    return (this.qualification = this.http.get(url_api));
   }
 
   getStudentById(id: string) {
     const url_api = `http://localhost:8000/api/student`;
-    return (this.group = this.http.get(url_api));
+    return (this.qualification = this.http.get(url_api));
   }
 
   getOffers() {
     const url_api = `http://localhost:3000/api/books?filter[where][oferta]=1`;
-    return (this.groups = this.http.get(url_api));
+    return (this.qualification = this.http.get(url_api));
   }
 
-  saveGroup(group: GroupInterface) {
+  saveGroup(group: QualificationInterface) {
     // TODO: obtener token
     // TODO: not null
     const token = this.authService.getToken();
-    const url_api = `http://127.0.0.1:8000/api/form`;
+    const url_api = `http://localhost:8000/api/qualification`;
     return this.http
-      .post<GroupInterface>(url_api, group, { headers: this.headers })
+      .post<QualificationInterface>(url_api, group, { headers: this.headers })
       .pipe(map(data => data));
   }
 
@@ -78,9 +73,9 @@ export class DataApiService {
 
     const groupId = group.groupId;
     const token = this.authService.getToken();
-    const url_api = `http://127.0.0.1:8000/api/form`;
+    const url_api = `http://localhost:8000/api/qualification`;
     return this.http
-      .put<GroupInterface>(url_api, group, { headers: this.headers })
+      .put<QualificationInterface>(url_api, group, { headers: this.headers })
       .pipe(map(data => data));
   }
 
@@ -92,7 +87,7 @@ export class DataApiService {
     console.log(token);
     const url_api = `http://localhost:3000/api/books/${id}/?access_token=${token}`;
     return this.http
-      .delete<GroupInterface>(url_api, { headers: this.headers })
+      .delete<QualificationInterface>(url_api, { headers: this.headers })
       .pipe(map(data => data));
   }
 }

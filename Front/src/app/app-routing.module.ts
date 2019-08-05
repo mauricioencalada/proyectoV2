@@ -12,11 +12,11 @@ import { Page404Component } from './components/page404/page404.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'offers', component: OffersComponent, canActivate: [AuthGuard] }, // TODO: only users auth
+  { path: '', component: LoginComponent },
+  { path: 'user/login', component: LoginComponent },
   { path: 'book/:id', component: DetailsBookComponent },
   { path: 'admin/list-books', component: ListBooksComponent, canActivate: [AuthGuard] }, // TODO: only users auth
-  { path: 'user/login', component: LoginComponent },
+  { path: 'offers', component: OffersComponent, canActivate: [AuthGuard] }, // TODO: only users auth
   { path: 'user/register', component: RegisterComponent },
   { path: 'user/profile', component: ProfileComponent, canActivate: [AuthGuard] }, // TODO: only users auth
   { path: '**', component: Page404Component }

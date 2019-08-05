@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DataApiService } from 'src/app/services/data-api.service';
-import { GroupInterface } from 'src/app/models/book-interface';
+import { QualificationInterface } from 'src/app/models/qualification-interface';
+import { QualificationService } from 'src/app/services/qualification.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-offers',
@@ -8,12 +9,44 @@ import { GroupInterface } from 'src/app/models/book-interface';
   styleUrls: ['./offers.component.css']
 })
 export class OffersComponent implements OnInit {
-  constructor(private dataApi: DataApiService) { }
-  private groups: GroupInterface;
-
+  constructor(private dataApiService: QualificationService) { }
+  private groups: QualificationInterface;
+  pageActual: number = 1;
+  public myCounter: number = 0;
   ngOnInit() {
-    this.dataApi
-      .getOffers()
-      .subscribe((data: GroupInterface) => (this.groups = data));
+    this.getListGroups();
   }
+
+  getListGroups(): void {
+    this.dataApiService
+      .getAllQualification()
+      .subscribe((groups: QualificationInterface) => (this.groups = groups));
+  }
+
+
+  onDeleteGroup(groups: QualificationInterface): void {
+    if (confirm('Are you sure to delete?')) {
+      this.dataApiService.deleteGroup(groups.id).subscribe();
+    }
+  }
+
+  onPreUpdateGroup(group: QualificationInterface): void {
+    this.dataApiService.selectedGroup = Object.assign({}, group);
+  }
+
+
+  resetForm(groupForm?: NgForm): void {
+    this.dataApiService.selectedGroup = {
+      id: null,
+      note1:'',
+      note2:'',
+      note3:'',
+      noteEnd:'',
+      description:'',
+      state:'',
+    };
+  }
+
+
+
 }

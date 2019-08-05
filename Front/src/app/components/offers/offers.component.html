@@ -1,4 +1,50 @@
-<section id="books">
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">NOTAS ASIGNADAS</h3>
+  <div class="card-body">
+    <div class="row mt-5">
+      <div class="col">
+        <button type="button" class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#modalQualif" (click)="resetForm()">Asignar Notas</button>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">ESTUDIANTES</th>
+              <th scope="col">NOTA 1</th>
+              <th scope="col">NOTA 2</th>
+              <th scope="col">NOTA 3</th>
+              <th scope="col">NOTA Final</th>
+              <th scope="col">&nbsp;</th>
+              <th scope="col">&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let  group of groups | paginate: {itemsPerPage: 7, currentPage: pageActual}; index as i">
+
+              <th scope="row"> {{i+1}}</th>
+              <td>{{group.id}}</td>
+              <td>{{group.note1}}</td>
+              <td>{{group.note2}}</td>
+              <td>{{group.note3}}</td>
+              <td>{{group.noteEnd}}</td>
+              <!--<td>{{group.oferta == 1 ? 'SI' : 'NO'}}</td>-->
+              <td>
+                <button class="btn btn-primary" (click)="onPreUpdateGroup(group)" data-toggle="modal" data-target="#modalQualif">Update</button>
+              </td>
+              <td>
+                <a href="/admin/list-books" class="btn btn-danger" (click)="onDeleteGroup(group.id)">Delete</a>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="pageActual = $event"></pagination-controls>
+      </div>
+    </div>
+    <app-modal-cal></app-modal-cal>
+  </div>
+</div>
+
+<!--<section id="books">
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let book of books">
@@ -27,4 +73,4 @@
       </div>
     </div>
   </div>
-</section>
+</section>-->

@@ -33,11 +33,12 @@ import { FormsModule } from '@angular/forms';
 import { DataApiService } from 'src/app/services/data-api.service';
 import { ModalComponent } from './components/modal/modal.component';
 import { TruncateTextPipe } from './pipes/truncate-text.pipe';
-import { DataCalService } from 'src/app/services/data-cal.service';
 
 // Externals
-import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerModule } from 'ngx-spinner'; 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { QualificationService } from './services/qualification.service';
+import { ModalCalComponent } from './components/modal/modal-cal/modal-cal.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ProfileComponent,
     Page404Component,
     ModalComponent,
-    TruncateTextPipe
+    TruncateTextPipe,
+    ModalCalComponent
   ],
   imports: [
     BrowserModule,
@@ -70,13 +72,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatListModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule,
-    HttpClientModule,
-    FormsModule,
-    NgxSpinnerModule,
+    MatSortModule, 
+    HttpClientModule, 
+    FormsModule, 
+    NgxSpinnerModule, 
     NgxPaginationModule
   ],
-  providers: [DataApiService, DataCalService],
+  providers: [DataApiService,QualificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
