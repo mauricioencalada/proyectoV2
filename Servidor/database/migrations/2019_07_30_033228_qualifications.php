@@ -15,10 +15,10 @@ class Qualifications extends Migration
     {
         Schema::create('Qualifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('note1');
-            $table->integer('note2');
-            $table->integer('note3');
-            $table->integer('noteEnd');
+            $table->double('note1');
+            $table->double('note2');
+            $table->double('note3');
+            $table->double('noteEnd');
             $table->string('description');
             $table->string('state')->default('ACTIVE');
             $table->timestamps();

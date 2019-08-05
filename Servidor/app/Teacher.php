@@ -1,9 +1,6 @@
 <?php
-
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
-
 class Teacher extends Model
 {
     protected $fillable = [
@@ -17,5 +14,4 @@ class Teacher extends Model
     {
         return $this->hasMany('App\Proyect');
     }
-
 }

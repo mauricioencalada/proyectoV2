@@ -1,9 +1,9 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
-use App\Proyect;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 class ProyectController extends Controller
 {
     public function getProyect(Request $request){
@@ -34,3 +34,4 @@ class ProyectController extends Controller
         return response()->json($proyect, 201);
     }
 }
+

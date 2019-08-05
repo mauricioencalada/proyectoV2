@@ -7,7 +7,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 class QualificationController extends Controller
 {
-
     public function getQualification(Request $request){
         $qualification = Qualifications::get();
         return response()->json($qualification, 200);

@@ -1,9 +1,6 @@
 <?php
-
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
-
 class Form extends Model
 {
     protected $fillable = [
@@ -13,7 +10,4 @@ class Form extends Model
     {
         return $this->hasOne('App\Proyect');
     }
-
-
-
 }
